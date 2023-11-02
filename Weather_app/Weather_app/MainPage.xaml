@@ -16,11 +16,13 @@
             <Frame RelativeLayout.YConstraint="-40" BackgroundColor="#fcfcfc" Margin="80,0" Padding="15" CornerRadius="15">
                 <StackLayout>
                     <Entry x:Name="userInput" WidthRequest="200" Placeholder="Введите город" />
-                    <Button x:Name="grtWeather" Text="Получить" BackgroundColor="#e6b035" TextColor="#8f6b18" FontAttributes="Bold"/>
+                    <Button x:Name="getWeather" Clicked="getWeather_Clicked" Text="Получить" BackgroundColor="#e6b035" TextColor="#8f6b18" FontAttributes="Bold"/>
                 </StackLayout>
             </Frame>
         </RelativeLayout>
+        
         <Label x:Name="resultLabel" Text="" FontSize="25" HorizontalOptions="Center" TextColor="#333" Margin="0,0,0,50"/>
+        
     </StackLayout>
  
 </ContentPage>
