@@ -8,7 +8,7 @@
         <StackLayout BackgroundColor="#194880">
             
             <Label Text="Погода" HorizontalOptions="Center" Margin="0,50,0,15" FontSize="30" TextColor="#091c33" FontAttributes="Bold"/>
-            <Image Margin="0,0,0,55" Source="https://cdn.icon-icons.com/icons2/2613/PNG/512/astronomy_solar_galaxy_sun_space_star_universe_icon_156878.png"/>
+            <Image x:Name="weatherImage" Margin="0,0,0,55" Source="https://cdn.icon-icons.com/icons2/2533/PNG/512/rainbow_weather_icon_152000.png"/>
             
         </StackLayout>
 
