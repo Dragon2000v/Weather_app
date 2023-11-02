@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Weather_app.MainPage">
+
+    <StackLayout BackgroundColor="#ededed">
+        
+        <StackLayout BackgroundColor="#194880">
+            
+            <Label Text="Погода" HorizontalOptions="Center" Margin="0,50,0,15" FontSize="30" TextColor="#091c33" FontAttributes="Bold"/>
+            <Image Margin="0,0,0,55" Source="https://cdn.icon-icons.com/icons2/2613/PNG/512/astronomy_solar_galaxy_sun_space_star_universe_icon_156878.png"/>
+            
+        </StackLayout>
+
+        <RelativeLayout>
+            <Frame RelativeLayout.YConstraint="-40" BackgroundColor="#fcfcfc" Margin="80,0" Padding="15" CornerRadius="15">
+                <StackLayout>
+                    <Entry x:Name="userInput" WidthRequest="200" Placeholder="Введите город" />
+                    <Button x:Name="grtWeather" Text="Получить" BackgroundColor="#e6b035" TextColor="#8f6b18" FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+        </RelativeLayout>
+        <Label x:Name="resultLabel" Text="" FontSize="25" HorizontalOptions="Center" TextColor="#333" Margin="0,0,0,50"/>
+    </StackLayout>
+ 
+</ContentPage>
