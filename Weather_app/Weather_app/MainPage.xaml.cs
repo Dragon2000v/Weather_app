@@ -13,6 +13,7 @@ namespace Weather_app
     public partial class MainPage : ContentPage
     {
         const string API = "f5378ff95499c7cd8f27fcf69f4bb8d2";
+
         public MainPage()
         {
             InitializeComponent();
@@ -21,24 +22,55 @@ namespace Weather_app
         private async void getWeather_Clicked(object sender, EventArgs e)
         {
             string city = userInput.Text.Trim();
-            if(city.Length < 2)
+
+            // Validate the city name.
+            if (city.Length < 2)
             {
-
-                await DisplayAlert("Error", "City used to be bigger", "Okay :(");
+                await DisplayAlert("Ошибка", "Название города слишком короткое", "ОК :(");
                 return;
-
             }
 
+            // Create an HttpClient object to send HTTP requests.
             HttpClient client = new HttpClient();
+
+            // Build the URL to the OpenWeatherMap API.
             string url = $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API}&units=metric";
-            string response = await client.GetStringAsync(url);
 
-            var json = JObject.Parse(response);
-            string temp = json["main"]["temp"].ToString();
+            try
+            {
+                // Send an HTTP request to the OpenWeatherMap API.
+                string response = await client.GetStringAsync(url);
 
-            resultLabel.Text = "Погода сейчас: " + temp;
+                // Parse the JSON response from the OpenWeatherMap API.
+                var json = JObject.Parse(response);
 
+                // Extract and format the weather information 
+                string mainWeather = json["weather"][0]["description"].ToString();
+                string temperature = json["main"]["temp"].ToString() + "°C";
+                string feelsLike = json["main"]["feels_like"].ToString() + "°C";
+                string pressure = json["main"]["pressure"].ToString() + " hPa";
+                string humidity = json["main"]["humidity"].ToString() + "%";
+                string windSpeed = json["wind"]["speed"].ToString() + " м/с";
+                string clouds = json["clouds"]["all"].ToString() + "% облачности";
+                string cityName = json["name"].ToString();
+                string country = json["sys"]["country"].ToString();
+
+                // Display the weather information 
+                resultLabel.Text = $"Погода в городе {cityName}, {country}:\n" +
+                                  $"Основные условия: {mainWeather}\n" +
+                                  $"Температура: {temperature}\n" +
+                                  $"Ощущается как: {feelsLike}\n" +
+                                  $"Давление: {pressure}\n" +
+                                  $"Влажность: {humidity}\n" +
+                                  $"Скорость ветра: {windSpeed}\n" +
+                                  $"Облачность: {clouds}";
+            }
+            catch (HttpRequestException)
+            {
+                await DisplayAlert("Ошибка", "Не удалось получить данные о погоде. Проверьте подключение к интернету и название города.", "ОК :(");
+            }
         }
+
 
     }
 }
